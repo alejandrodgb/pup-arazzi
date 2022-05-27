@@ -4,3 +4,4 @@ __pycache__/
 bento_service/*
 *.ipynb
 *.bac
+*.zip
