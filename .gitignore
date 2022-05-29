@@ -5,3 +5,5 @@ bento_service/*
 *.ipynb
 *.bac
 *.zip
+*.DS*
+WWW/startbootstrap-landing-page-gh-pages/assets/img/*
