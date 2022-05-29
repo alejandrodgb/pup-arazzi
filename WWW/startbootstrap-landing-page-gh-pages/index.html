@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Pup-arazzi. Find out who your pup is!" />
+        <meta name="author" content="PetJungle.com.au" />
+        <title>Pup-arazzi - Find out who your pup is!</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">Pup-arazzi</h1>
+                            <p>Find out who your best friend is!</p>
+                            <div class="container">
+                                <div class="row top-buffer">
+                                    <div class="col-sm">
+                                        <p> Want to know what is your pup's breed or want to know what breed you look like?</p>
+                                    </div>
+                                </div>
+                                <!-- Image upload section -->
+                                <div class="row top-buffer">
+                                    <div class="col-sm">
+                                        <button id="upload-button"
+                                                type="button" 
+                                                class="btn btn-light"
+                                                onclick="showPicker()">Upload a photo!</button>
+                                        <input id='file-input'
+                                               class='no-display'
+                                               type='file'
+                                               name='file'
+                                               accept='image/*'
+                                               onchange='showPicked(this)'>
+                                    </div>
+                                </div>
+                                <div class="row top-buffer">
+                                    <div class="col-sm">
+                                        <img id="image-picked" src="assets/img/pawprint.png" alt="Uploaded image" class="rounded mx-auto d-block fit-inside">
+                                        <span id="upload-label" class="badge badge-pill badge-info no-display"></span>
+                                    </div>    
+                                </div>
+                                <!-- Analyse section including result label-->
+                                <div class="row top-buffer">
+                                    <div class="col-sm">
+                                        <a id="reset-button" href="https://puparazziapp.com" class="btn btn-light no-display">Try again</a>
+                                        <button id="analyse-button" type="button" class="btn btn-light" onclick="analyse()">Analyse</button>
+                                        <div id="result-announcement" class="alert alert-warning no-display" role="alert">
+                                            We are analysing your image. This may take up to two (2) minutes.
+                                        </div>
+                                        <div id="result-spinner" class="spinner-border text-light no-display" role="status"></div>
+                                        <div>
+                                            <div id="result-label" class="alert alert-danger top-buffer no-display" role="alert">
+                                                Sorry, something went wrong. Please try again.
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                                <!-- Other results section -->
+                                <div id="OR-container" class="no-display">   
+                                    <div class="row top-buffer"> 
+                                        <div class="col-sm top-buffer">
+                                            <h4>Other possible breeds:</h4>
+                                        </div> 
+                                    </div>
+                                    <div class="row top-buffer"> 
+                                        <div class="col-sm top-buffer">
+                                            <div class="card bg-light text-dark">
+                                                <div class="card-body">
+                                                    <h6 id="OR1-title" class="card-title">First</h6>
+                                                    <img id="OR1-img" class="card-img-top fit-inside" src="" alt="Alternative breed">
+                                                    <div id="OR1-prob" class="top-buffer">Prob</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm top-buffer">
+                                            <div class="card bg-light text-dark">
+                                                <div class="card-body">
+                                                    <h6 id="OR2-title" class="card-title">Second</h6>
+                                                    <img id="OR2-img" class="card-img-top fit-inside" src="" alt="Alternative breed">
+                                                    <div id="OR2-prob" class="top-buffer">Prob</div>
+                                                </div>
+                                            </div>
+                                        </div>   
+                                    </div>
+                                    <div class="row top-buffer"> 
+                                        <div class="col-sm top-buffer">
+                                            <div class="card bg-light text-dark">
+                                                <div class="card-body">
+                                                    <h6 id="OR3-title" class="card-title">Third</h6>
+                                                    <img id="OR3-img" class="card-img-top fit-inside" src="" alt="Alternative breed">
+                                                    <div id="OR3-prob" class="top-buffer">Prob</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm top-buffer">
+                                            <div class="card bg-light text-dark">
+                                                <div class="card-body">
+                                                    <h6 id="OR4-title" class="card-title">Forth</h6>
+                                                    <img id="OR4-img" class="card-img-top fit-inside" src="" alt="Alternative breed">
+                                                    <div id="OR4-prob" class="top-buffer">Prob</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Footer-->
+        <footer class="footer bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                        <ul class="list-inline mb-2">
+                            <li class="list-inline-item"><a href="#!">About</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="mailto:puparazzicontact@puparazziapp.com">Contact</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
+                            <li class="list-inline-item">⋅</li>
+                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                        </ul>
+                        <p class="text-muted small mb-4 mb-lg-0">&copy; puparazziapp.com 2022. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
