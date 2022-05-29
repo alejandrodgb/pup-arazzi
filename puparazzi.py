@@ -2,10 +2,10 @@
 
 from bentoml.frameworks.fastai import FastaiModelArtifact
 from bentoml.adapters import FileInput
-from fastcore.utils import tuplify, detuplify
 from io import BytesIO
 import json
 import numpy as np
+from  bentoml.types import InferenceTask, InferenceResult, InferenceError
 
 import bentoml
 
@@ -44,4 +44,11 @@ class PuparazziService(bentoml.BentoService):
         topk = sorted([(p,c,i) for p,c,i in zip(probs,cls,idxs)],reverse=True)
 
         # Return a json object with probabilities, classes, and indexes in the classes list
-        return json.dumps([{'prob':float(p),'class':c,'idx':int(i)} for p,c,i in topk])
+
+        results = json.dumps([{'prob':float(p),'class':c,'idx':int(i)} for p,c,i in topk])
+
+        return InferenceResult(
+            data=results,
+            http_status=200,
+            http_headers={"Content-Type":"application/json", "access-control-allow-origin":"*"}
+        )
