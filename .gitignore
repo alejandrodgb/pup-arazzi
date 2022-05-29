@@ -7,3 +7,4 @@ bento_service/*
 *.zip
 *.DS*
 WWW/startbootstrap-landing-page-gh-pages/assets/img/*
+*.ico
